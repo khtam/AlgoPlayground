@@ -1,8 +1,15 @@
+import birthdayCakeCandle.countCandles
 import minMaxSum.minMaxSumOf
 import stairCase.printStairCase
 
 fun main(args: Array<String>) {
-    calculateMinMaxSum()
+    countBlownCandles()
+}
+
+fun countBlownCandles() {
+    val numberOfCandles = readLine()!!.toInt();
+    val candleHeights = readLine()!!.split(" ").map { it.toLong() };
+    println(countCandles(candleHeights));
 }
 
 private fun calculateMinMaxSum() {
