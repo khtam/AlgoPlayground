@@ -1,7 +1,12 @@
-
+import stairCase.printStairCase
 
 fun main(args: Array<String>) {
-    calculateFractions();
+    takeInStairCaseSize()
+}
+
+private fun takeInStairCaseSize() {
+    val count: Int = readLine()!!.toInt()
+    printStairCase(count);
 }
 
 private fun calculateFractions() {
@@ -19,5 +24,5 @@ private fun calculateDiagonalDifference() {
     for (index in 0 until dimension) {
         matrix[index] = readLine()!!.split(" ").map(String::toInt).toIntArray()
     }
-    println("The result is :"+diagonalDifference.calculate(dimension, matrix));
+    println("The result is :" + diagonalDifference.calculate(dimension, matrix));
 }
