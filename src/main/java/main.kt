@@ -1,9 +1,15 @@
 import birthdayCakeCandle.countCandles
 import minMaxSum.minMaxSumOf
 import stairCase.printStairCase
+import timeConversion.convertTime
 
 fun main(args: Array<String>) {
-    countBlownCandles()
+    convertTimeFrom()
+}
+
+fun convertTimeFrom() {
+    val time = readLine()!!;
+    println(convertTime(time));
 }
 
 fun countBlownCandles() {
