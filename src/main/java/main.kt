@@ -1,7 +1,14 @@
+import minMaxSum.minMaxSumOf
 import stairCase.printStairCase
 
 fun main(args: Array<String>) {
-    takeInStairCaseSize()
+    calculateMinMaxSum()
+}
+
+private fun calculateMinMaxSum() {
+    val listOfLongInput = readLine()!!.split(" ").map { it.toLong() };
+    val result = minMaxSumOf(listOfLongInput);
+    println(result[0].toString()+" "+result[1].toString());
 }
 
 private fun takeInStairCaseSize() {
