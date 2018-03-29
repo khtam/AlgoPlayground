@@ -1,5 +1,5 @@
 package coinOnTable
 
-fun minOperations(row: Int, column: Int, rounds: Int): Int {
+fun minOperations(row: Int, column: Int, rounds: Int, inputArray: Array<CharArray>): Int {
     return 0;
 }
