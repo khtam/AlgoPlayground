@@ -20,7 +20,7 @@ class MinOperationsKtTest(private val row: Int, private val column: Int, private
     @Test
     fun minOperations() {
 
-        val result = minOperations(row, column, rounds, arrayOf(charArrayOf()));
+        val result = minOperations(row, column, rounds, "");
 
         assertThat(result).isEqualTo(expectedResult)
     }
