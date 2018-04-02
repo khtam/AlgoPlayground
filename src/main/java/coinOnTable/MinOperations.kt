@@ -6,11 +6,11 @@ fun minOperations(row: Int, column: Int, rounds: Int, input: String): Int {
 }
 
 fun parseInput(input: String, row: Int, column: Int): Array<CharArray> {
-    var parsedArray = arrayOf(charArrayOf());
+    var parsedArray = Array(row, { CharArray(column, { '0' }) })
     val rows = input.chunked(column);
 
-    for (i in 0 until row){
-        for (j in 0 until column){
+    for (i in 0 until row) {
+        for (j in 0 until column) {
             parsedArray[i][j] = rows.get(i).get(j);
         }
     }
