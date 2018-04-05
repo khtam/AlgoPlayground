@@ -10,14 +10,14 @@ class BoardIteratorSpec extends Specification {
         def iteration = new BoardIterator(board, destination);
 
         when:
-        def steps = iteration.nextStep(new Pair(0, 0), 0);
+        def steps = iteration.nextStep(new Pair(0, 0), 3);
 
         then:
-        steps == expectedNumberOfSteps;
+        steps == expectedRemainingSteps;
 
         where:
-        input                                                | destination    || expectedNumberOfSteps
-        [[(char) 'R', (char) 'D'], [(char) '*', (char) 'L']] | new Pair(1, 0) || 3
+        input                                                | destination    || expectedRemainingSteps
+        [[(char) 'R', (char) 'D'], [(char) '*', (char) 'L']] | new Pair(1, 0) || 0
     }
 
     def "Should track all distances from destination"() {
@@ -26,13 +26,13 @@ class BoardIteratorSpec extends Specification {
         def iteration = new BoardIterator(board, destination);
 
         when:
-        iteration.nextStep(new Pair(0, 0), 0);
+        iteration.nextStep(new Pair(0, 0), 3);
 
         then:
-        iteration.projectedMinSteps == expectedProjections;
+        iteration.distancesFromDestination == expectedDistancesFromDestination;
 
         where:
-        input                                                | destination    || expectedProjections
-        [[(char) 'R', (char) 'D'], [(char) '*', (char) 'L']] | new Pair(1, 0) || [1,3,3,3]
+        input                                                | destination    || expectedDistancesFromDestination
+        [[(char) 'R', (char) 'D'], [(char) '*', (char) 'L']] | new Pair(1, 0) || [1,2,1,0]
     }
 }
