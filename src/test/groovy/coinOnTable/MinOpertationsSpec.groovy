@@ -7,8 +7,11 @@ import spock.lang.Unroll
 class MinOpertationsSpec extends Specification {
 
     def "#input for #row X #column matrix in #rounds rounds needs #expectedChanges changes"() {
+        given:
+        def coinOnTableGame = new CoinOnTableGame(input, row, column);
+
         expect:
-        MinOperationsKt.minOperations(row, column, rounds, input) == expectedChanges
+        coinOnTableGame.minOperations(rounds) == expectedChanges
 
         where:
         row | column | rounds | input  || expectedChanges
