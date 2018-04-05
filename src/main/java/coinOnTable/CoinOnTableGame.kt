@@ -24,6 +24,9 @@ class CoinOnTableGame(input: String, row: Int, column: Int) {
     }
 
     fun minOperations(rounds: Int): Int {
+        val minStepsNeeded = destination.first + destination.second;
+        if (rounds < minStepsNeeded)
+            return  -1;
         return 0;
     }
 

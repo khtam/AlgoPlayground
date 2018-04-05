@@ -14,9 +14,10 @@ class MinOpertationsSpec extends Specification {
         coinOnTableGame.minOperations(rounds) == expectedChanges
 
         where:
-        row | column | rounds | input  || expectedChanges
-        2   | 2      | 3      | "RD*L" || 0
-        2   | 2      | 1      | "RD*L" || 1
+        row | column | rounds | input       || expectedChanges
+        2   | 2      | 3      | "RD*L"      || 0
+        2   | 2      | 1      | "RD*L"      || 1
+        3   | 3      | 1      | "RDDDLDRR*" || -1
     }
 
 }
