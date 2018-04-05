@@ -29,10 +29,10 @@ class BoardIteratorSpec extends Specification {
         iteration.nextStep(new Pair(0, 0), 0);
 
         then:
-        iteration.distancesFromDestination == [1,2,1,0];
+        iteration.projectedMinSteps == expectedProjections;
 
         where:
-        input                                                | destination    || expectedNumberOfSteps
-        [[(char) 'R', (char) 'D'], [(char) '*', (char) 'L']] | new Pair(1, 0) || 3
+        input                                                | destination    || expectedProjections
+        [[(char) 'R', (char) 'D'], [(char) '*', (char) 'L']] | new Pair(1, 0) || [1,3,3,3]
     }
 }

@@ -6,7 +6,7 @@ class BoardIterator(val board: Array<CharArray>, val destination: Pair<Int, Int>
 
     private val numberOfRows = board.size;
     private val numberOfColumns = board[0].size;
-    val distancesFromDestination = mutableListOf<Int>();
+    val projectedMinSteps = mutableListOf<Int>();
 
     fun nextStep(position: Pair<Int, Int>, steps: Int): Int {
         val x = position.first;
@@ -15,8 +15,7 @@ class BoardIterator(val board: Array<CharArray>, val destination: Pair<Int, Int>
         if (x >= numberOfRows || y >= numberOfColumns)
             return -1;
 
-        val distanceFromDestination = abs(destination.first - x) + abs(destination.second - y);
-        distancesFromDestination.add(distanceFromDestination);
+        calculateRemainingSteps(x, y, steps);
 
         val instruction = board[x][y];
         when (instruction) {
@@ -27,5 +26,10 @@ class BoardIterator(val board: Array<CharArray>, val destination: Pair<Int, Int>
             '*' -> return steps;
         }
         return -1;
+    }
+
+    private fun calculateRemainingSteps(x: Int, y: Int, steps: Int) {
+        val distanceFromDestination = abs(destination.first - x) + abs(destination.second - y);
+        projectedMinSteps.add(steps + distanceFromDestination);
     }
 }
