@@ -11,7 +11,7 @@ class coinOnTableGameSpec extends Specification {
         def coinOnTableGame = new CoinOnTableGame(input, row, column);
 
         expect:
-        coinOnTableGame.initialState == expectedArray;
+        coinOnTableGame.initialBoard == expectedArray;
         coinOnTableGame.destination.first == destinationX;
         coinOnTableGame.destination.second == destinationY; ;
 
