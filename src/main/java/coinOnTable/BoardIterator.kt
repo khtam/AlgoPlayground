@@ -1,6 +1,6 @@
 package coinOnTable
 
-class BoardIteration(val board: Array<CharArray>) {
+class BoardIterator(val board: Array<CharArray>) {
 
     val numberOfRows = board.size;
     val numberOfColumns = board[0].size;
