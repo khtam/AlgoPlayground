@@ -17,7 +17,7 @@ class coinOnTableGameSpec extends Specification {
 
         where:
         input  | row | column || expectedArray                      || destinationX || destinationY
-        "RD*L" | 2   | 2      || [['R', 'D'], ['*', 'L']].toArray() || 0            || 1
+        "RD*L" | 2   | 2      || [['R', 'D'], ['*', 'L']].toArray() || 1            || 0
     }
 
 }

@@ -15,7 +15,7 @@ class CoinOnTableGame(input: String, row: Int, column: Int) {
                 val cell = rows.get(i).get(j)
                 parsedArray[i][j] = cell;
                 if (cell == '*') {
-                    endCoordinates = Pair(j, i);
+                    endCoordinates = Pair(i, j);
                 }
             }
         }
