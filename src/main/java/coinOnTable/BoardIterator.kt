@@ -4,8 +4,8 @@ import kotlin.math.abs
 
 class BoardIterator(val board: Array<CharArray>, val destination: Pair<Int, Int>) {
 
-    val numberOfRows = board.size;
-    val numberOfColumns = board[0].size;
+    private val numberOfRows = board.size;
+    private val numberOfColumns = board[0].size;
     val distancesFromDestination = mutableListOf<Int>();
 
     fun nextStep(position: Pair<Int, Int>, steps: Int): Int {
