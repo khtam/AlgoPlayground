@@ -33,13 +33,13 @@ class CoinOnTableGame(input: String, row: Int, column: Int) {
         val startingPosition = Pair(0, 0)
         val remainingSteps = countingIterator.nextStep(startingPosition, expectedNumberOfSteps);
 
-        if (goalAchieved(remainingSteps))
+        if (isGoalAchieved(remainingSteps))
             return 0;
 
         //modify board here
         return 0;
     }
 
-    private fun goalAchieved(remainingSteps: Int) = remainingSteps > -1
+    private fun isGoalAchieved(remainingSteps: Int) = remainingSteps > -1
 
 }
