@@ -30,13 +30,16 @@ class CoinOnTableGame(input: String, row: Int, column: Int) {
             return -1;
 
         val countingIterator = BoardIterator(initialBoard, destination);
-        val remainingSteps = countingIterator.nextStep(Pair(0, 0), expectedNumberOfSteps);
+        val startingPosition = Pair(0, 0)
+        val remainingSteps = countingIterator.nextStep(startingPosition, expectedNumberOfSteps);
 
-        if (remainingSteps > -1)
+        if (goalAchieved(remainingSteps))
             return 0;
 
         //modify board here
         return 0;
     }
+
+    private fun goalAchieved(remainingSteps: Int) = remainingSteps > -1
 
 }
