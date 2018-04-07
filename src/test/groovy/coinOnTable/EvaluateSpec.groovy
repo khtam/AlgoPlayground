@@ -4,7 +4,7 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 @Unroll
-class MinOpertationsSpec extends Specification {
+class EvaluateSpec extends Specification {
 
     def "#input for #row X #column matrix in #rounds rounds needs #expectedChanges changes"() {
         given:
