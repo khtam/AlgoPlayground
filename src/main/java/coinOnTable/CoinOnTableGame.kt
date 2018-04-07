@@ -29,15 +29,18 @@ class CoinOnTableGame(input: String, row: Int, column: Int) {
         if (expectedNumberOfSteps < minNumberStepsNeeded)
             return -1;
 
-        val countingIterator = BoardIterator(initialBoard, destination);
-        val startingPosition = Pair(0, 0)
-        val remainingSteps = countingIterator.nextStep(startingPosition, expectedNumberOfSteps);
-
-        if (isGoalAchieved(remainingSteps))
-            return 0;
+        if (reachesDestinationWithinExpectation(Pair(0, 0), expectedNumberOfSteps)) return 0
 
         //modify board here
         return 0;
+    }
+
+    private fun reachesDestinationWithinExpectation(startingPosition: Pair<Int, Int>, expectedNumberOfSteps: Int): Boolean {
+        val countingIterator = BoardIterator(initialBoard, destination);
+        val remainingSteps = countingIterator.nextStep(startingPosition, expectedNumberOfSteps);
+        if (isGoalAchieved(remainingSteps))
+            return true;
+        return false
     }
 
     private fun isGoalAchieved(remainingSteps: Int) = remainingSteps > -1
