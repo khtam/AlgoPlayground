@@ -4,14 +4,14 @@ import spock.lang.Specification
 import spock.lang.Unroll
 
 @Unroll
-class minOperationSpec extends Specification {
+class findMinOperationSpec extends Specification {
 
     def "#input for #row X #column matrix in #rounds rounds needs #expectedChanges changes"() {
         given:
         def coinOnTableGame = new CoinOnTableGame(input, row, column);
 
         expect:
-        coinOnTableGame.minOperation(rounds) == expectedChanges
+        coinOnTableGame.findMinOperation(rounds) == expectedChanges
 
         where:
         row | column | rounds | input       || expectedChanges

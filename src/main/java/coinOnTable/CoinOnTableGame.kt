@@ -23,7 +23,7 @@ class CoinOnTableGame(input: String, row: Int, column: Int) {
         destination = endCoordinates;
     }
 
-    fun minOperation(expectedNumberOfSteps: Int): Int {
+    fun findMinOperation(expectedNumberOfSteps: Int): Int {
         val minNumberStepsNeeded = destination.first + destination.second;
 
         if (expectedNumberOfSteps < minNumberStepsNeeded)
