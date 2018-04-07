@@ -3,7 +3,7 @@ package coinOnTable
 class CoinOnTableGame(input: String, row: Int, column: Int) {
 
     private val destination: Pair<Int, Int>;
-    private val initialState: Array<CharArray>;
+    private val initialBoard: Array<CharArray>;
 
     init {
         var parsedArray = Array(row, { CharArray(column, { '0' }) })
@@ -19,14 +19,23 @@ class CoinOnTableGame(input: String, row: Int, column: Int) {
                 }
             }
         }
-        initialState = parsedArray;
+        initialBoard = parsedArray;
         destination = endCoordinates;
     }
 
-    fun minOperations(rounds: Int): Int {
-        val minStepsNeeded = destination.first + destination.second;
-        if (rounds < minStepsNeeded)
-            return  -1;
+    fun evaluate(expectedNumberOfSteps: Int): Int {
+        val minNumberStepsNeeded = destination.first + destination.second;
+
+        if (expectedNumberOfSteps < minNumberStepsNeeded)
+            return -1;
+
+        val countingIterator = BoardIterator(initialBoard, destination);
+        val remainingSteps = countingIterator.nextStep(Pair(0, 0), expectedNumberOfSteps);
+
+        if (remainingSteps > -1)
+            return 0;
+
+        //modify board here
         return 0;
     }
 

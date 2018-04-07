@@ -11,7 +11,7 @@ class MinOpertationsSpec extends Specification {
         def coinOnTableGame = new CoinOnTableGame(input, row, column);
 
         expect:
-        coinOnTableGame.minOperations(rounds) == expectedChanges
+        coinOnTableGame.evaluate(rounds) == expectedChanges
 
         where:
         row | column | rounds | input       || expectedChanges

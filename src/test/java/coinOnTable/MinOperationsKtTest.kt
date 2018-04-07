@@ -22,7 +22,7 @@ class MinOperationsKtTest(private val row: Int, private val column: Int, private
 
         val coinOnTableGame = CoinOnTableGame("RD*L", row, column);
 
-        val result = coinOnTableGame.minOperations(rounds);
+        val result = coinOnTableGame.evaluate(rounds);
 
         assertThat(result).isEqualTo(expectedResult)
     }
