@@ -15,7 +15,7 @@ class BoardModifier(val destination: Pair<Int, Int>) {
                 continue;
 
             board[position.first][position.second] = instruction;
-            if (isGoalAchieved(board, position, remainingSteps, destination))
+            if (isGoalAchieved(board, remainingSteps, destination))
                 return numberOfOperations + 1;
 
             val movedDown = Pair(position.first + 1, position.second);

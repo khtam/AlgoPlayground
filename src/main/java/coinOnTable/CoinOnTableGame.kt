@@ -32,7 +32,7 @@ class CoinOnTableGame(input: String, row: Int, column: Int) {
         if (expectedNumberOfSteps < minNumberStepsNeeded)
             return -1;
 
-        if (isGoalAchieved(initialBoard, startingPosition, expectedNumberOfSteps, destination)) return 0;
+        if (isGoalAchieved(initialBoard, expectedNumberOfSteps, destination)) return 0;
 
         return boardModifier.modifyWithLeastNumberOfOperations(initialBoard, startingPosition, expectedNumberOfSteps, 0);
     }

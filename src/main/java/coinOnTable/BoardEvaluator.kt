@@ -1,6 +1,7 @@
 package coinOnTable
 
-fun isGoalAchieved(board: Array<CharArray>, startingPosition: Pair<Int, Int>, expectedNumberOfSteps: Int, destination: Pair<Int, Int>): Boolean {
+fun isGoalAchieved(board: Array<CharArray>, expectedNumberOfSteps: Int, destination: Pair<Int, Int>): Boolean {
+    val startingPosition = Pair(0, 0);
     val countingIterator = BoardIterator(board, destination);
     val remainingSteps = countingIterator.nextStep(startingPosition, expectedNumberOfSteps);
     if (remainingSteps > -1)
