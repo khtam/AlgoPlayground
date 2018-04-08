@@ -19,11 +19,11 @@ class BoardModifier(val destination: Pair<Int, Int>) {
                 return numberOfOperations + 1;
 
             val movedDown = Pair(position.first + 1, position.second);
-            val operationsForMovingDownwards = modifyWithLeastNumberOfOperations(board, movedDown, remainingSteps - 1, numberOfOperations + 1);
+            val operationsForMovingDownwards = modifyWithLeastNumberOfOperations(board, movedDown, remainingSteps, numberOfOperations + 1);
             listOfOperations.add(operationsForMovingDownwards);
 
             val movedRight = Pair(position.first, position.second + 1);
-            val operationsForMovingRight = modifyWithLeastNumberOfOperations(board, movedRight, remainingSteps - 1, numberOfOperations + 1);
+            val operationsForMovingRight = modifyWithLeastNumberOfOperations(board, movedRight, remainingSteps, numberOfOperations + 1);
             listOfOperations.add(operationsForMovingRight);
         }
         val leastAmountOfOperations = listOfOperations
