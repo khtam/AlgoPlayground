@@ -6,12 +6,14 @@ class BoardModifier(val destination: Pair<Int, Int>) {
 
     fun modifyWithLeastNumberOfOperations(board: Array<CharArray>, position: Pair<Int, Int>, remainingSteps: Int, numberOfOperations: Int): Int {
         val listOfOperations = mutableListOf<Int>();
+        val numberOfRows = board.size;
+        val numberOfColumns = board[0].size;
 
         if (isOutOfBounds(board, position))
             return -1;
 
         for (instruction in instructionSet) {
-            if (board[position.first][position.second] == instruction)
+            if (board[position.first][position.second] == instruction || instructionPointingOutOfBounds(position, instruction, numberOfRows, numberOfColumns))
                 continue;
 
             board[position.first][position.second] = instruction;
@@ -32,6 +34,22 @@ class BoardModifier(val destination: Pair<Int, Int>) {
                 .firstOrNull();
 
         return leastAmountOfOperations ?: -1;
+    }
+
+    private fun instructionPointingOutOfBounds(position: Pair<Int, Int>, instruction: Char, numberOfRows: Int, numberOfColumns: Int): Boolean {
+        if (position.first == 0 && instruction == 'U')
+            return true;
+
+        if (position.first == numberOfRows && instruction == 'D')
+            return true;
+
+        if (position.second == 0 && instruction == 'L')
+            return true;
+
+        if (position.second == numberOfColumns && instruction == 'R')
+            return true;
+
+        return false;
     }
 
 }
