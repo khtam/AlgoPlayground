@@ -4,6 +4,7 @@ class CoinOnTableGame(input: String, row: Int, column: Int) {
 
     private val destination: Pair<Int, Int>;
     private val initialBoard: Array<CharArray>;
+    private val boardModifier: BoardModifier;
 
     init {
         var parsedArray = Array(row, { CharArray(column, { '0' }) })
@@ -21,18 +22,19 @@ class CoinOnTableGame(input: String, row: Int, column: Int) {
         }
         initialBoard = parsedArray;
         destination = endCoordinates;
+        boardModifier = BoardModifier(destination);
     }
 
     fun findMinOperation(expectedNumberOfSteps: Int): Int {
         val minNumberStepsNeeded = destination.first + destination.second;
+        val startingPosition = Pair(0, 0)
 
         if (expectedNumberOfSteps < minNumberStepsNeeded)
             return -1;
 
-        if (isGoalAchieved(initialBoard, Pair(0, 0), expectedNumberOfSteps, destination)) return 0
+        if (isGoalAchieved(initialBoard, startingPosition, expectedNumberOfSteps, destination)) return 0;
 
-        //modify board here
-        return 0;
+        return boardModifier.modifyWithLeastNumberOfOperations(initialBoard, startingPosition, expectedNumberOfSteps, 0);
     }
 
 }

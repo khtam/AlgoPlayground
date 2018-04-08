@@ -13,7 +13,7 @@ fun isOutOfBounds(board: Array<CharArray>, position: Pair<Int, Int>): Boolean {
     val numberOfColumns = board[0].size;
     val x = position.first;
     val y = position.second;
-    if (x >= numberOfRows || y >= numberOfColumns)
+    if (x >= numberOfRows || y >= numberOfColumns || x < 0 || y < 0)
         return true;
     return false;
 }
