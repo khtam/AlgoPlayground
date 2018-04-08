@@ -4,15 +4,13 @@ import kotlin.math.abs
 
 class BoardIterator(val board: Array<CharArray>, val destination: Pair<Int, Int>) {
 
-    private val numberOfRows = board.size;
-    private val numberOfColumns = board[0].size;
     val distancesFromDestination = mutableListOf<Int>();
 
     fun nextStep(position: Pair<Int, Int>, remainingSteps: Int): Int {
         val x = position.first;
         val y = position.second;
 
-        if (x >= numberOfRows || y >= numberOfColumns || remainingSteps < 0)
+        if (isOutOfBounds(board, position)|| remainingSteps < 0)
             return -1;
 
         calculateRemainingSteps(x, y, remainingSteps);
