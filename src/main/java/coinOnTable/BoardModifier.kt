@@ -12,23 +12,36 @@ class BoardModifier(val destination: Pair<Int, Int>) {
         if (isOutOfBounds(board, position))
             return -1;
 
-        instructionSet
-                .filter { instruction -> !instruction.equals(board[position.first][position.second]) }
-                .filter { instruction -> !instructionPointingOutOfBounds(position, instruction, numberOfRows, numberOfColumns) }
-                .map { instruction ->
-                    val newBoard = board.copyOf();
-                    newBoard[position.first][position.second] = instruction;
-                    if (isGoalAchieved(newBoard, remainingSteps, destination))
-                        return numberOfOperations + 1;
+        board.forEachIndexed { rowIndex, row ->
+            row.forEachIndexed { columnIndex, originalInstruction ->
+                val currentPosition = Pair(rowIndex, columnIndex);
+                if (isUniqueIteration(numberOfOperations, rowIndex, position, columnIndex))
+                    instructionSet
+                            .filter { instruction -> instruction != originalInstruction }
+                            .filter { instruction -> !instructionPointingOutOfBounds(currentPosition, instruction, numberOfRows, numberOfColumns) }
+                            .map { instruction ->
+                                val newBoard = board.copyOf();
+                                newBoard[currentPosition.first][currentPosition.second] = instruction;
+                                if (isGoalAchieved(newBoard, remainingSteps, destination))
+                                    return numberOfOperations + 1;
+                            }
+            }
+        }
 
-                    val movedDown = Pair(position.first + 1, position.second);
-                    val operationsForMovingDownwards = modifyWithLeastNumberOfOperations(newBoard, movedDown, remainingSteps, numberOfOperations + 1);
-                    listOfOperations.add(operationsForMovingDownwards);
+        board.forEachIndexed { rowIndex, row ->
+            row.forEachIndexed { columnIndex, originalInstruction ->
+                val currentPosition = Pair(rowIndex, columnIndex);
+                instructionSet
+                        .filter { instruction -> instruction != originalInstruction }
+                        .filter { instruction -> !instructionPointingOutOfBounds(currentPosition, instruction, numberOfRows, numberOfColumns) }
+                        .map { instruction ->
+                            val newBoard = board.copyOf();
+                            newBoard[currentPosition.first][currentPosition.second] = instruction;
+                            listOfOperations.add(modifyWithLeastNumberOfOperations(newBoard, currentPosition, remainingSteps, numberOfOperations + 1));
+                        }
+            }
+        }
 
-                    val movedRight = Pair(position.first, position.second + 1);
-                    val operationsForMovingRight = modifyWithLeastNumberOfOperations(newBoard, movedRight, remainingSteps, numberOfOperations + 1);
-                    listOfOperations.add(operationsForMovingRight);
-                }
         val leastAmountOfOperations = listOfOperations
                 .filter { number -> number > -1 }
                 .sorted()
@@ -36,6 +49,9 @@ class BoardModifier(val destination: Pair<Int, Int>) {
 
         return leastAmountOfOperations ?: -1;
     }
+
+    private fun isUniqueIteration(numberOfOperations: Int, rowIndex: Int, position: Pair<Int, Int>, columnIndex: Int) =
+            !(numberOfOperations > 0 && rowIndex == position.first && columnIndex == position.second)
 
     private fun instructionPointingOutOfBounds(position: Pair<Int, Int>, instruction: Char, numberOfRows: Int, numberOfColumns: Int): Boolean {
         if (position.first == 0 && instruction == 'U')
