@@ -15,11 +15,14 @@ class CoinOnTableGame(input: String, row: Int, column: Int) {
             for (j in 0 until column) {
                 val cell = rows.get(i).get(j)
                 parsedArray[i][j] = cell;
+                print(cell);
                 if (cell == '*') {
                     endCoordinates = Pair(i, j);
                 }
             }
+            println()
         }
+        println("*********************")
         initialBoard = parsedArray;
         destination = endCoordinates;
         boardModifier = BoardModifier(destination);

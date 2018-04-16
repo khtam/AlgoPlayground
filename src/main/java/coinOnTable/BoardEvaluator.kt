@@ -4,8 +4,13 @@ fun isGoalAchieved(board: Array<CharArray>, expectedNumberOfSteps: Int, destinat
     val startingPosition = Pair(0, 0);
     val countingIterator = BoardIterator(board, destination);
     val remainingSteps = countingIterator.nextStep(startingPosition, expectedNumberOfSteps);
-    if (remainingSteps > -1)
+    if (remainingSteps > -1) {
+        board.forEach { row ->
+            row.forEach { print(it) }
+            println()
+        }
         return true;
+    }
     return false
 }
 
