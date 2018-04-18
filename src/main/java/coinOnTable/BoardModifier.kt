@@ -9,7 +9,7 @@ class BoardModifier(val destination: Pair<Int, Int>) {
         val numberOfRows = board.size;
         val numberOfColumns = board[0].size;
 
-        if (isOutOfBounds(board, position))
+        if (numberOfOperations == numberOfRows * numberOfColumns)
             return -1;
 
         board.forEachIndexed { rowIndex, row ->
