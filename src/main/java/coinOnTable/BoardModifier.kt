@@ -9,6 +9,8 @@ class BoardModifier(val destination: Pair<Int, Int>) {
         val numberOfRows = board.size;
         val numberOfColumns = board[0].size;
 
+        println("layer:$numberOfOperations")
+
         if (numberOfOperations == numberOfRows * numberOfColumns)
             return -1;
 
