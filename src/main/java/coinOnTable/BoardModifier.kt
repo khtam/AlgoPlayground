@@ -4,7 +4,7 @@ class BoardModifier(val destination: Pair<Int, Int>) {
 
     val instructionSet = setOf<Char>('U', 'D', 'L', 'R');
 
-    fun modifyWithLeastNumberOfOperations(board: Array<CharArray>, position: Pair<Int, Int>, remainingSteps: Int, numberOfOperations: Int): Int {
+    fun modifyWithLeastNumberOfOperations(board: Array<CharArray>, remainingSteps: Int, numberOfOperations: Int, positionList: List<Pair<Int, Int>>): Int {
         val listOfOperations = mutableListOf<Int>();
         val numberOfRows = board.size;
         val numberOfColumns = board[0].size;
@@ -15,7 +15,7 @@ class BoardModifier(val destination: Pair<Int, Int>) {
         board.forEachIndexed { rowIndex, row ->
             row.forEachIndexed { columnIndex, originalInstruction ->
                 val currentPosition = Pair(rowIndex, columnIndex);
-                if (isUniqueIteration(numberOfOperations, rowIndex, position, columnIndex))
+                if (isUniqueIteration(numberOfOperations, rowIndex, columnIndex, positionList))
                     instructionSet
                             .filter { instruction -> instruction != originalInstruction }
                             .filter { instruction -> !instructionPointingOutOfBounds(currentPosition, instruction, numberOfRows, numberOfColumns) }
@@ -31,14 +31,18 @@ class BoardModifier(val destination: Pair<Int, Int>) {
         board.forEachIndexed { rowIndex, row ->
             row.forEachIndexed { columnIndex, originalInstruction ->
                 val currentPosition = Pair(rowIndex, columnIndex);
-                instructionSet
-                        .filter { instruction -> instruction != originalInstruction }
-                        .filter { instruction -> !instructionPointingOutOfBounds(currentPosition, instruction, numberOfRows, numberOfColumns) }
-                        .map { instruction ->
-                            val newBoard = cloneBoard(board);
-                            newBoard[currentPosition.first][currentPosition.second] = instruction;
-                            listOfOperations.add(modifyWithLeastNumberOfOperations(newBoard, currentPosition, remainingSteps, numberOfOperations + 1));
-                        }
+                if (isUniqueIteration(numberOfOperations, rowIndex, columnIndex, positionList)) {
+                    val newPositionList = positionList + currentPosition;
+                    instructionSet
+                            .filter { instruction -> instruction != originalInstruction }
+                            .filter { instruction -> !instructionPointingOutOfBounds(currentPosition, instruction, numberOfRows, numberOfColumns) }
+                            .map { instruction ->
+                                val newBoard = cloneBoard(board);
+                                newBoard[currentPosition.first][currentPosition.second] = instruction;
+                                listOfOperations.add(modifyWithLeastNumberOfOperations(
+                                        newBoard, remainingSteps, numberOfOperations + 1, newPositionList));
+                            }
+                }
             }
         }
 
@@ -54,8 +58,13 @@ class BoardModifier(val destination: Pair<Int, Int>) {
         return Array<CharArray>(board.size) { board[it].copyOf() };
     }
 
-    private fun isUniqueIteration(numberOfOperations: Int, rowIndex: Int, position: Pair<Int, Int>, columnIndex: Int) =
-            !(numberOfOperations > 0 && rowIndex == position.first && columnIndex == position.second)
+    private fun isUniqueIteration(numberOfOperations: Int, rowIndex: Int, columnIndex: Int, positionList: List<Pair<Int, Int>>): Boolean {
+        var isUnique = true;
+        positionList.forEach { position ->
+            isUnique && !(numberOfOperations > 0 && rowIndex == position.first && columnIndex == position.second)
+        }
+        return isUnique;
+    }
 
     private fun instructionPointingOutOfBounds(position: Pair<Int, Int>, instruction: Char, numberOfRows: Int, numberOfColumns: Int): Boolean {
         if (position.first == 0 && instruction == 'U')
