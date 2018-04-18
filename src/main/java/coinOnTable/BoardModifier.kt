@@ -63,7 +63,7 @@ class BoardModifier(val destination: Pair<Int, Int>) {
     private fun isUniqueIteration(numberOfOperations: Int, rowIndex: Int, columnIndex: Int, positionList: List<Pair<Int, Int>>): Boolean {
         var isUnique = true;
         positionList.forEach { position ->
-            isUnique && !(rowIndex == position.first && columnIndex == position.second)
+            isUnique = isUnique && !(rowIndex == position.first && columnIndex == position.second)
         }
         return isUnique;
     }
