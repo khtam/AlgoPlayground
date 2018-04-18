@@ -30,14 +30,13 @@ class CoinOnTableGame(input: String, row: Int, column: Int) {
 
     fun findMinOperation(expectedNumberOfSteps: Int): Int {
         val minNumberStepsNeeded = destination.first + destination.second;
-        val startingPosition = Pair(0, 0)
 
         if (expectedNumberOfSteps < minNumberStepsNeeded)
             return -1;
 
         if (isGoalAchieved(initialBoard, expectedNumberOfSteps, destination)) return 0;
 
-        return boardModifier.modifyWithLeastNumberOfOperations(initialBoard, expectedNumberOfSteps, 0, listOf(startingPosition));
+        return boardModifier.modifyWithLeastNumberOfOperations(initialBoard, expectedNumberOfSteps, 0, listOf());
     }
 
 }
