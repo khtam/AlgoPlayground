@@ -39,10 +39,12 @@ class BoardModifier(val destination: Pair<Int, Int>) {
                             .filter { instruction -> instruction != originalInstruction }
                             .filter { instruction -> !instructionPointingOutOfBounds(currentPosition, instruction, numberOfRows, numberOfColumns) }
                             .map { instruction ->
-                                val newBoard = cloneBoard(board);
-                                newBoard[currentPosition.first][currentPosition.second] = instruction;
-                                listOfOperations.add(modifyWithLeastNumberOfOperations(
-                                        newBoard, remainingSteps, numberOfOperations + 1, newPositionList));
+                                if (listOfOperations.isEmpty()) {
+                                    val newBoard = cloneBoard(board);
+                                    newBoard[currentPosition.first][currentPosition.second] = instruction;
+                                    listOfOperations.add(modifyWithLeastNumberOfOperations(
+                                            newBoard, remainingSteps, numberOfOperations + 1, newPositionList));
+                                }
                             }
                 }
             }
