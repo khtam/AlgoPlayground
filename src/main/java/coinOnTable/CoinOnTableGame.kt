@@ -9,6 +9,8 @@ class CoinOnTableGame(input: String, row: Int, column: Int) {
     init {
         var parsedArray = Array(row, { CharArray(column, { '0' }) })
         var endCoordinates = Pair(0, 0);
+        if (input.length != row * column)
+            throw IllegalArgumentException("Input does not match dimension!");
         val rows = input.chunked(column);
 
         for (i in 0 until row) {
