@@ -9,8 +9,7 @@ class CoinOnTableGame(input: String, row: Int, column: Int) {
     init {
         var parsedArray = Array(row, { CharArray(column, { '0' }) })
         var endCoordinates = Pair(0, 0);
-        if (input.length != row * column)
-            throw IllegalArgumentException("Input does not match dimension!");
+        validateInput(input, row, column)
         val rows = input.chunked(column);
 
         for (i in 0 until row) {
@@ -39,6 +38,14 @@ class CoinOnTableGame(input: String, row: Int, column: Int) {
         if (isGoalAchieved(initialBoard, expectedNumberOfSteps, destination)) return 0;
 
         return boardModifier.modifyWithLeastNumberOfOperations(initialBoard, expectedNumberOfSteps, 0, listOf());
+    }
+
+    private fun validateInput(input: String, row: Int, column: Int) {
+        //To-do: Add Test
+        if (input.length != row * column)
+            throw IllegalArgumentException("Input does not match dimension!");
+        if (input.count { char -> char.equals('*') } > 1)
+            throw IllegalArgumentException("More than one destination defined!");
     }
 
 }
