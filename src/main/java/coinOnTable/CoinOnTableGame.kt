@@ -44,8 +44,8 @@ class CoinOnTableGame(input: String, row: Int, column: Int) {
         //To-do: Add Test
         if (input.length != row * column)
             throw IllegalArgumentException("Input does not match dimension!");
-        if (input.count { char -> char.equals('*') } > 1)
-            throw IllegalArgumentException("More than one destination defined!");
+        if (input.count { char -> char.equals('*') } != 1)
+            throw IllegalArgumentException("Invalid number of destination defined!");
     }
 
 }
