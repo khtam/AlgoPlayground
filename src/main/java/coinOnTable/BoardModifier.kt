@@ -17,7 +17,7 @@ class BoardModifier(val destination: Pair<Int, Int>) {
         board.forEachIndexed { rowIndex, row ->
             row.forEachIndexed { columnIndex, originalInstruction ->
                 val currentPosition = Pair(rowIndex, columnIndex);
-                if (isUniqueIteration(numberOfOperations, rowIndex, columnIndex, positionList))
+                if (isUniqueIteration(rowIndex, columnIndex, positionList))
                     instructionSet
                             .filter { instruction -> instruction != originalInstruction }
                             .filter { instruction -> !instructionPointingOutOfBounds(currentPosition, instruction, numberOfRows, numberOfColumns) }
@@ -33,7 +33,7 @@ class BoardModifier(val destination: Pair<Int, Int>) {
         board.forEachIndexed { rowIndex, row ->
             row.forEachIndexed { columnIndex, originalInstruction ->
                 val currentPosition = Pair(rowIndex, columnIndex);
-                if (isUniqueIteration(numberOfOperations, rowIndex, columnIndex, positionList)) {
+                if (isUniqueIteration(rowIndex, columnIndex, positionList)) {
                     val newPositionList = positionList + currentPosition;
                     instructionSet
                             .filter { instruction -> instruction != originalInstruction }
@@ -62,7 +62,7 @@ class BoardModifier(val destination: Pair<Int, Int>) {
         return Array<CharArray>(board.size) { board[it].copyOf() };
     }
 
-    private fun isUniqueIteration(numberOfOperations: Int, rowIndex: Int, columnIndex: Int, positionList: List<Pair<Int, Int>>): Boolean {
+    private fun isUniqueIteration(rowIndex: Int, columnIndex: Int, positionList: List<Pair<Int, Int>>): Boolean {
         var isUnique = true;
         positionList.forEach { position ->
             isUnique = isUnique && !(rowIndex == position.first && columnIndex == position.second)
