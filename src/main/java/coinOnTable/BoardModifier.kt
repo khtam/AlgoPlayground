@@ -9,13 +9,6 @@ class BoardModifier(val destination: Pair<Int, Int>) {
         val numberOfRows = board.size;
         val numberOfColumns = board[0].size;
 
-        var lastPosition: List<Pair<Int,Int>>;
-
-        if (iteratedPositionList.isEmpty())
-            lastPosition = listOf()
-        else
-            lastPosition = listOf(iteratedPositionList.last())
-
         println("layer:$numberOfOperations")
 
         if (numberOfOperations == numberOfRows * numberOfColumns)
@@ -24,7 +17,7 @@ class BoardModifier(val destination: Pair<Int, Int>) {
         board.forEachIndexed { rowIndex, row ->
             row.forEachIndexed { columnIndex, originalInstruction ->
                 val currentPosition = Pair(rowIndex, columnIndex);
-                if (isUniqueIteration(rowIndex, columnIndex, lastPosition))
+                if (isUniqueIteration(rowIndex, columnIndex, iteratedPositionList))
                     instructionSet
                             .filter { instruction -> instruction != originalInstruction }
                             .filter { instruction -> !instructionPointingOutOfBounds(currentPosition, instruction, numberOfRows, numberOfColumns) }
