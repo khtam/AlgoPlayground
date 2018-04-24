@@ -14,13 +14,14 @@ class findMinOperationSpec extends Specification {
         coinOnTableGame.findMinOperation(rounds) == expectedMinChanges
 
         where:
-        row | column | rounds | input       || expectedMinChanges
+        row | column | rounds | input                                 || expectedMinChanges
 //        2   | 2      | 3      | "RD*L"      || 0
 //        2   | 2      | 1      | "RD*L"      || 1
 //        3   | 3      | 1      | "RDDDLDRR*" || -1
 //        3   | 3      | 4      | "RRDDLLRR*" || 1
 //        3   | 3      | 4      | "RRUDLLRR*" || 1
-        3   | 3      | 4      | "RRUULLRR*" || 1
+//        3   | 3      | 4      | "RRUULLRR*" || 2
+        7   | 5      | 8      | "UUUUUUUUUUUUUUUUUUUUUU*UUUUUUUUUUUU" || 6
     }
 
 }
