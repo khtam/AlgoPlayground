@@ -11,13 +11,13 @@ class BoardModifier(val destination: Pair<Int, Int>) {
 
         println("layer:$numberOfOperations")
 
-        if (numberOfOperations == numberOfRows * numberOfColumns)
-            return -1;
+//        if (numberOfOperations == numberOfRows * numberOfColumns)
+//            return -1;
 
         board.forEachIndexed { rowIndex, row ->
             row.forEachIndexed { columnIndex, originalInstruction ->
                 val currentPosition = Pair(rowIndex, columnIndex);
-                if (isUniqueIteration(rowIndex, columnIndex, iteratedPositionList))
+                if (isUniqueIteration(rowIndex, columnIndex, iteratedPositionList) && !isDestination(currentPosition))
                     instructionSet
                             .filter { instruction -> instruction != originalInstruction }
                             .filter { instruction -> !instructionPointingOutOfBounds(currentPosition, instruction, numberOfRows, numberOfColumns) }
@@ -33,18 +33,16 @@ class BoardModifier(val destination: Pair<Int, Int>) {
         board.forEachIndexed { rowIndex, row ->
             row.forEachIndexed { columnIndex, originalInstruction ->
                 val currentPosition = Pair(rowIndex, columnIndex);
-                if (isUniqueIteration(rowIndex, columnIndex, iteratedPositionList)) {
+                if (isUniqueIteration(rowIndex, columnIndex, iteratedPositionList) && !isDestination(currentPosition)) {
                     val newPositionList = iteratedPositionList + currentPosition;
                     instructionSet
                             .filter { instruction -> instruction != originalInstruction }
                             .filter { instruction -> !instructionPointingOutOfBounds(currentPosition, instruction, numberOfRows, numberOfColumns) }
                             .map { instruction ->
-                                if (listOfOperations.isEmpty()) {
-                                    val newBoard = cloneBoard(board);
-                                    newBoard[currentPosition.first][currentPosition.second] = instruction;
-                                    listOfOperations.add(modifyWithLeastNumberOfOperations(
-                                            newBoard, remainingSteps, numberOfOperations + 1, newPositionList));
-                                }
+                                val newBoard = cloneBoard(board);
+                                newBoard[currentPosition.first][currentPosition.second] = instruction;
+                                listOfOperations.add(modifyWithLeastNumberOfOperations(
+                                        newBoard, remainingSteps, numberOfOperations + 1, newPositionList));
                             }
                 }
             }
@@ -57,6 +55,8 @@ class BoardModifier(val destination: Pair<Int, Int>) {
 
         return leastAmountOfOperations ?: -1;
     }
+
+    private fun isDestination(currentPosition: Pair<Int, Int>) = currentPosition.first == destination.first && currentPosition.second == destination.second;
 
     private fun cloneBoard(board: Array<CharArray>): Array<CharArray> {
         return Array<CharArray>(board.size) { board[it].copyOf() };
